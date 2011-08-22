@@ -7,6 +7,6 @@ GEMSPEC = Gem::Specification.new do |s|
   s.homepage     = 'http://rake.rubyforge.org'
   s.summary      = 'Thread safe priority queues'
   s.description  = 'Provide prioritized versions of the ruby standard library Queue and SizedQueue.'
-  s.files        = Dir.glob('{lib,test}/**/*') + %w[README]
+  s.files        = Dir.glob('{lib,test}/**/*') + %w[README.md Rakefile]
   s.require_path = 'lib'
 end
