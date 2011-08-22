@@ -1,5 +1,5 @@
 GEMSPEC = Gem::Specification.new do |s|   
-  s.name         = 'thread_priority_queues'
+  s.name         = 'thread_priority_queue'
   s.version      = '1.0.0'
   s.platform     = Gem::Platform::RUBY
   s.author       = 'Benny Bach'
