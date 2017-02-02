@@ -1,6 +1,18 @@
 require 'thread'
 
-class PriorityQueue < Queue
+class PriorityQueue
+  #
+  # Creates a new queue.
+  #
+  def initialize
+    @que = []
+    @waiting = []
+    @que.taint          # enable tainted communication
+    @waiting.taint
+    self.taint
+    @mutex = Mutex.new
+  end
+
   #
   # Pushes +obj+ to the queue at priority +prio+.
   #
@@ -50,6 +62,39 @@ class PriorityQueue < Queue
   alias shift pop
   alias deq pop
 
+  #
+  # Returns +true+ if the queue is empty.
+  #
+  def empty?
+    @que.empty?
+  end
+
+  #
+  # Removes all objects from the queue.
+  #
+  def clear
+    @que.clear
+  end
+
+  #
+  # Returns the length of the queue.
+  #
+  def length
+    @que.length
+  end
+
+  #
+  # Alias of length.
+  #
+  alias size length
+
+  #
+  # Returns the number of threads waiting on the queue.
+  #
+  def num_waiting
+    @waiting.size
+  end
+
   protected
 
   def find_first_of(priority, range=(0..length))
@@ -61,7 +106,7 @@ class PriorityQueue < Queue
         find_first_of priority, (range.end-center..range.end)
       else
         find_first_of priority, (range.begin..range.begin+center)
-      end  
+      end
     end
   end
 
